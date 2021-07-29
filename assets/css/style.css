@@ -1,0 +1,211 @@
+ul {
+vertical-align: top;
+padding-left: 20px;
+padding-right: 20px;
+float: left;
+}
+
+li {
+list-style: none;
+}
+
+h4 {
+font-size: medium;
+display:inline;
+float: center;
+}
+
+p {
+border-bottom-style: solid;
+border-width: thin;
+}
+
+body {
+background-color: darkslategray;
+}
+
+footer {
+position: static;
+bottom: 0;
+width: 100%;
+} 
+
+/* .container {
+  width:100%;
+} */
+.card-width{
+  width: 100%;
+  margin:auto;
+}
+
+.card-width {
+  display:flex;
+  flex-wrap: wrap;
+}
+
+#camp-list{
+padding-top:20px;
+float:none;
+padding-right: 0px;
+padding-left: 0px;
+}
+
+.camp-info{
+  padding:10px;
+  font-size: 12px;
+}
+
+.btn-error {
+background-color: red;
+color: white;
+}
+
+.btn-next {
+/* border-radius: 15px; */
+background-color: yellow;
+color: black;
+}
+
+.btn-prev {
+/* border-radius: 15px; */
+background-color: yellow;
+color: black;
+}
+
+.card-custom {
+  width:100%;
+  height:550px;
+}
+
+#user-input-container {
+margin-top: -6px;
+}
+
+#clear-search-btn {
+position: absolute;
+bottom: 5px;
+left: 50%;
+transform: translate(-50%, 0%);
+}
+
+#favorite-btn {
+  position: relative;
+  bottom: 55px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  }
+
+  #print-btn {
+  position: relative;
+  bottom: 55px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  }
+            
+[id^="swipe-"] {
+overflow: scroll;
+}
+
+/* #remove-btn {
+  position: relative;
+  bottom: 65px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  }
+        
+  [id^="swipe-"] {
+  overflow: scroll;
+} */
+
+.modal-container {
+  position: fixed;
+  display:flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  top:0;
+  left:0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,.5);
+  pointer-events:none;
+  opacity:0;
+}
+
+#modal {
+  background-color:white;
+}
+.show {
+  pointer-events: auto;
+  opacity: 1;
+  z-index: 1;
+}
+
+.map{
+  width:100%;
+  height:100%;
+}
+
+
+@media screen and (max-width: 1565px){
+  .container{
+    width:auto;
+  }
+}
+
+@media screen and (max-width: 995px){
+  .map{
+    padding-bottom: 55px;
+  }
+}
+
+@media screen and (max-width: 865px){
+  #forcast-container{
+    font-size:10px;
+  }
+}
+
+@media screen and (max-width: 420px){
+  span{
+    font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 360px) and (max-width: 575px){
+  
+
+}
+
+@media print{
+  @page { 
+    size: landscape;
+  }
+  .map{
+    display:inline-block;
+    width:581px;
+    height:550px;
+  }
+  .card{
+    display:inline-block;
+    width:250px;
+    height:550px;
+  }
+  .card-custom {
+    display:inline-block;
+    width:582px;
+    height:550px;
+  }
+  
+  .noPrint{
+      display:none !important;
+  }
+  
+footer:before {
+  display: block;
+  content: "Thank you for printing our content, Team 3. Aaron Wiebe, David Whipple, Kevin Phan, Lucas Wick, Samantha Ybarra";
+  border: 1px solid #bbb;
+  font-style: italic;
+  text-align: center;
+  }
+  
+}

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Camping App</title>
+    <!-- CSS Styles Link -->
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/build/ol.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script> -->
+  </head>
+
+  <body>
+    <div class="container l12">
+      <!-- NAV START -->
+      <nav class="center green darken-4 l12">
+        <div class="nav-wrapper container">
+          <a href="/" class="brand-logo center"><span>Camping Buddy</span></a>
+        </div>
+      </nav>
+      <!-- NAV END -->
+
+      <!-- WEATHER START -->
+      <div class="row light-blue lighten-1 card-panel noPrint">
+        <div class="col s12">
+          <div class="yellow-text accent-2">
+            <div id=forcast-container>
+              <div class="col m2">
+                <h4 id="Day1" class="center">
+                </h4>
+                <ul>
+                  <img id=Day1-icon src=" ">
+                  <li id=Day1-temp>Temp</li>
+                  <li id=Day1-wind>Wind</li>
+                  <li id=Day1-hum>Humidity</li>
+                </ul>
+              </div>
+              <div class="col m2">
+                <h4 id="Day2">
+                  
+                </h4>
+                <ul>
+                  <img id=Day2-icon src=" ">
+                  <li id=Day2-temp>Temp</li>
+                  <li id=Day2-wind>Wind</li>
+                  <li id=Day2-hum>Humidity</li>
+                </ul>
+              </div>
+              <div class="col m2">
+                <h4 id="Day3">
+                  
+                </h4>
+                <ul>
+                  <img id=Day3-icon src=" ">
+                  <li id=Day3-temp>Temp</li>
+                  <li id=Day3-wind>Wind</li>
+                  <li id=Day3-hum>Humidity</li>
+                </ul>
+              </div>
+              <div class="col m2">
+                <h4 id="Day4">
+                  
+                </h4>
+                <ul>
+                  <img id=Day4-icon src=" ">
+                  <li id=Day4-temp>Temp</li>
+                  <li id=Day4-wind>Wind</li>
+                  <li id=Day4-hum>Humidity</li>
+                </ul>
+              </div>
+
+              <div class="col m2">
+                <h4 id="Day5">
+                  
+                </h4>
+                <ul>
+                  <img id=Day5-icon src=" ">
+                  <li id=Day5-temp>Temp</li>
+                  <li id=Day5-wind>Wind</li>
+                  <li id=Day5-hum>Humidity</li>
+                </ul>
+              </div>
+              <div class="col m2">
+                <h4 id="Day6">
+                  
+                </h4>
+                <ul>
+                  <img id=Day6-icon src=" ">
+                  <li id=Day6-temp>Temp</li>
+                  <li id=Day6-wind>Wind</li>
+                  <li id=Day6-hum>Humidity</li>
+                </ul>
+              </div>
+          <!-- </div>  -->
+          </div>
+        </div>
+      </div>
+      <!-- WEATHER END -->
+    </div>
+      <!-- I'M USING ONE ROW TO HOLD 3 COLUMNS HERE -->
+    <div class="row card-width">
+      <!-- USER INPUT START -->
+      <div class="col l3 noPrint" style="min-width: 283px" >
+        <div id="user-input-container" class="card" style="min-height: 550px">
+          <div class="card-title">
+            <form>
+              <div class="input-field">
+                <input
+                  id="searchTerm"
+                  type="search"
+                  class="center light-blue lighten-5"
+                  placeholder="Input State Code"
+                  required
+                />
+                <label class="label-icon" for="searchTerm"
+                  ><i class="material-icons">search</i></label
+                >
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+            <!-- USER INPUT BUTTONS START -->
+            <div class="container">
+              <div class="left">
+                <a href="#" class="waves-effect waves-light btn-small float-none" onclick="gatherCampsites()"
+                  >Search</a
+                >
+              </div>
+              <div class="right">
+                <a href="#" id= "open-modal" onclick="populateModal()" class="waves-effect waves-light btn-small float-none"
+                  >Favorites</a
+                >
+              </div>
+            </div>
+            <!-- USER INPUT BUTTONS END -->
+          </div>
+          <div class="card-content">
+            <ul class="center" id="camp-list">
+             
+            </ul>
+          </div>
+          <div id="clear-search-btn" class="center">
+            <a href="#" class="waves-effect waves-light btn-small" onclick="clearSearchPage()"
+              >Clear Search</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- USER INPUT END -->
+      <!-- Comment -->
+      <!-- CAMPSITE INFO START -->
+      <div class="col l3">
+        <div class="card" style="min-height: 550px">
+          <div class="card-title center">Camp Info:</div>
+          <ul id="tabs-swipe" class="tabs">
+            <li class="tab col s3 info-tab noPrint"><a style="color:black;" href="#swipe-1">1</a></li>
+            <li class="tab col s3 info-tab noPrint"><a style="color:black;" href="#swipe-2">2</a></li>
+            <li class="tab col s3 info-tab noPrint"><a style="color:black;" href="#swipe-3">3</a></li>
+            <li class="tab col s3 info-tab noPrint"><a style="color:black;" href="#swipe-4">4</a></li>
+          </ul>
+
+ 
+          <div id="swipe-1" class="col s12 blue"></div>
+          <div id="swipe-2" class="col s12 red"></div>
+          <div id="swipe-3" class="col s12 green"></div>
+          <div id="swipe-4" class="col s12 yellow"></div>
+ 
+
+        </div>
+        <!-- <div> -->
+        <a href="#" class="waves-effect waves-light btn-small noPrint" id="favorite-btn" 
+            >Add to Favorites</a
+          >
+        <!-- </div>  -->
+        <!-- <div id="remove-btn" class = "center">
+          <a href="#" class="waves-effect waves-light btn-small"
+          >Remove from Favorites</a>
+        </div> -->
+      </div>
+      <script>
+        var el = document.querySelector('.tabs');
+        var instance = M.Tabs.init(el, {swipeable:true});
+      </script>
+      <!-- CAMPSITE INFO END -->
+
+      <!-- MAP START -->
+      <div class="col l6">
+        <div class="card card-custom">
+          <div id="map" class="map"></div>
+
+        </div>
+        <div id="print-btn" class="center">
+          <a href="#" class="waves-effect waves-light btn-small noPrint" onclick="window.print();"
+            >Print</a
+          >
+        </div>
+      </div>
+      <!-- MAP END -->
+    </div>
+    <div class="modal-container" id="modal-container">
+      <div id= "modal" class="card-title center"></div>
+        <ul id="popModal"></ul>
+        <a href="#" id= "close-modal" class="waves-effect waves-light btn-small">Return</a>
+      </div>
+    </div>
+    <!-- FOOTER START -->
+    <footer class="page-footer green darken-4">
+      <div class="center valign-wrapper">
+        <div class="row">
+          <div class="l12">
+            <h6>Camping Buddy &copy;2021</h6>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </div>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/build/ol.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
