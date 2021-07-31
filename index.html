@@ -20,13 +20,10 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/build/ol.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="./assets/js/script.js"></script> -->
+
   </head>
 
-  <body>
+  <body id="body">
     <div class="container l12">
       <!-- NAV START -->
       <nav class="center green darken-4 l12">
@@ -137,7 +134,7 @@
             <!-- USER INPUT BUTTONS START -->
             <div class="container">
               <div class="left">
-                <a href="#" class="waves-effect waves-light btn-small float-none" onclick="gatherCampsites()"
+                <a href="#" class="waves-effect waves-light btn-small float-none" onclick="validateInput()"
                   >Search</a
                 >
               </div>
@@ -187,11 +184,6 @@
         <a href="#" class="waves-effect waves-light btn-small noPrint" id="favorite-btn" 
             >Add to Favorites</a
           >
-        <!-- </div>  -->
-        <!-- <div id="remove-btn" class = "center">
-          <a href="#" class="waves-effect waves-light btn-small"
-          >Remove from Favorites</a>
-        </div> -->
       </div>
       <script>
         var el = document.querySelector('.tabs');
@@ -230,7 +222,7 @@
       </div>
     </footer>
     </div>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/build/ol.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
