@@ -135,7 +135,7 @@ footer {
   height: 100%;
 }
 
-@media screen and (max-width: 1617px) {
+@media screen and (max-width: 1635px) {
   .col.s12.m6.l3.noPrint {
     width: 60vw;
     /* float: left; */
