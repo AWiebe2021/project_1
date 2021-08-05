@@ -72,6 +72,11 @@ footer {
   color: black;
 }
 
+.card {
+  min-height: 550px;
+  min-width: 283px;
+}
+
 .card-custom {
   width: 100%;
   height: 550px;
@@ -194,29 +199,40 @@ footer {
 @media print {
   @page {
     size: landscape;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
   }
-  .map {
-    display: inline-block;
-    width: 581px;
-    height: 550px;
-  }
+
   .card {
-    display: inline-block;
+    position:fixed; left:60px; top:120px;
+    /* display:inline-block; */
+    /* align-self: stretch;
+    vertical-align: top; */
     width: 250px;
     height: 550px;
   }
   .card-custom {
-    display: inline-block;
-    width: 582px;
-    height: 550px;
+    position:fixed; left:360px; top:120px;
+    /* display:inline-block; */
+    /* display: flex; */
+    /* vertical-align: top; */
+    /* justify-content: flex-end; */
+    width: 600px;
+    height:550px;
   }
-
+  .map {
+    width: 100%;
+    height: 100%;
+  }
   .noPrint {
     display: none !important;
   }
 
   footer:before {
     display: block;
+      position:fixed; left:130px; bottom:50px;
     content: "Thank you for printing our content, Team 3. Aaron Wiebe, David Whipple, Kevin Phan, Lucas Wick, Samantha Ybarra";
     border: 1px solid #bbb;
     font-style: italic;
