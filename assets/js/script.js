@@ -188,7 +188,7 @@ function gatherCampsites(){
       //API to pull in a background image
       var state = states[(validStates.indexOf(searchStr))];
       state.split(" ").join("%20");
-      var api3Url = "https://pixabay.com/api/?key="+pixabayApiKey+"&q="+state+"&image_type=photo&orientation=horizontal&category=nature&editors_choice=false&safesearch=true&per_page=3";
+      var api3Url = "https://pixabay.com/api/?key="+pixabayApiKey+"&q=state%20of%20"+state+"&image_type=photo&orientation=horizontal&category=nature&editors_choice=false&safesearch=true";
       fetch(api3Url)
       .then(backgroundResponse => backgroundResponse.json())
       .then(backgroundResponse => {
