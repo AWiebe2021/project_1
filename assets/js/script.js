@@ -7,16 +7,24 @@ var hour = moment().hours();
 var campSiteName = "";
 var campSiteID = "";
 var campID = [];
-var validStates = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA",
+const validStates = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA",
                   "MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN",
                   "TX","UT","VT","VA","WA","WV","WI","WY"];
-var states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia",
+const states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia",
               "Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts",
               "Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico",
               "New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina",
-              "South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
+              "South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
-var Sector = [
+const centerOfStates = ["32.7794, -86.8287","64.0685, -152.2782","34.2744, -111.6602","34.8938, -92.4426","37.1841, -119.4696","38.9972, -105.5478",
+                        "41.6219, -72.7273","38.9896, -75.5050","28.6305, -82.4497","32.6415, -83.4426","20.2927, -156.3737","44.3509, -114.6130",
+                        "40.0417, -89.1965","39.8942, -86.2816","42.0751, -93.4960","38.4937, -98.3804","37.5347, -85.3021","31.0689, -91.9968","45.3695, -69.2428","39.0550, -76.7909",
+                        "42.2596, -71.8083","44.3467, -85.4102","46.2807, -94.3053","32.7364, -89.6678","38.3566, -92.4580","47.0527, -109.6333","41.5378, -99.7951","39.3289, -116.6312",
+                        "43.6805, -71.5811","40.1907, -74.6728","34.4071, -106.1126","42.9538, -75.5268","35.5557, -79.3877","47.4501, -100.4659","40.2862, -82.7937","35.5889, -97.4943",
+                        "43.9336, -120.5583","40.8781, -77.7996","41.6762, -71.5562","33.9169, -80.8964","44.4443, -100.2263","35.8580,- 86.3505","31.4757, -99.3312","39.3055, -111.6703",
+                        "44.0687, -72.6658","37.5215, -78.8537","47.3826, -120.4472","38.6409, -80.6227","44.6243, -89.9941","42.9957, -107.5512"];
+
+const Sector = [
   "N",
   "NNE",
   "NNE",
@@ -57,6 +65,11 @@ let openWeatherApiKey = "c6372f1324c78c2e38ccaa1ebef5b15c";
 let pixabayApiKey = "22722015-2600ce20055da0a54f573e666";
 let searchPage = 0;
 let searchLimit = 10;
+
+// var ug = import {useGeographic} from 'ol/proj';
+const useGeographic = require("ol/proj").useGeographic;
+useGeographic();
+
 // Open Layerts appears keyless 
 
 function validateInput(){
@@ -88,6 +101,7 @@ function validateInput(){
 //Use JQuery to build a button list
 function gatherCampsites(){
   var searchStr = (document.querySelector("#searchTerm").value).toUpperCase();
+  let loiArray = [];
   var apiUrl =
     "https://developer.nps.gov/api/v1/campgrounds?stateCode=" +
     searchStr +
@@ -130,6 +144,10 @@ function gatherCampsites(){
         //DOM manipulation
         var btn = document.getElementById(campSiteResponse.data[i].id);
         btn.addEventListener("click", specCampsites);
+        // const startMarker = new Feature({
+        //   type: 'icon',
+        //   geometry: new Point(campSiteResponse.data[i].latLong),
+        // });
       };
       //Add a "no Camp", next or previous button if needed use JQuery
       if (campSiteResponse.total == 0){
@@ -184,6 +202,22 @@ function gatherCampsites(){
         var btn = document.getElementById("PREV-PAGE");
         btn.addEventListener("click", prevPage);
       };
+      let str = centerOfStates[(validStates.indexOf(searchStr))];
+      let myArr = str.split(",");
+      currentLocation = {lat:myArr[0].trim(),lng:myArr[1].trim()};
+      updateMap(6.5);
+
+      // const vectorLayer = new VectorLayer({
+      //   source: new VectorSource({
+      //     features: [startMarker],
+      //   }),
+      //   style: function (feature) {
+      //     return styles[feature.get('type')];
+      //   },
+      // });
+  
+      // map.addLayer(vectorLayer);
+
 
       //API to pull in a background image
       var state = states[(validStates.indexOf(searchStr))];
@@ -365,7 +399,7 @@ function specCampsites(){
       .then(weatherResponse => {
         // console.log(weatherResponse)
         //setting 5 day forcast
-          updateMap(); 
+          updateMap(16); 
           //DOM manipulation    
           for (let i = 1; i < 7; i++) {
             document.querySelector("#Day"+i).textContent = (moment().add(i, 'd')).format("L");
@@ -376,7 +410,7 @@ function specCampsites(){
           };
       });
     }else{
-      updateMap(); 
+      updateMap(16); 
       for (let i = 1; i < 7; i++) {
         document.querySelector("#Day"+i).textContent = (moment().add(i, 'd')).format("L");
         document.querySelector("#Day"+i+"-temp").textContent = "Hi Temp: " + "NDA";
@@ -459,24 +493,39 @@ function populateModal(){
   };
 }
 
-function updateMap(){
+function updateMap(zoom){
+
   //clear map
   var mapEl = document.getElementById("map");
   while (mapEl.hasChildNodes()) {  
     mapEl.removeChild(mapEl.firstChild);
   };
   //if we have long get map data
+  const place = [currentLocation.lng,currentLocation.lat];
+  const point = new ol.geom.Point(place);
   if (parseFloat(currentLocation.lng)){
-  var map = new ol.Map({
-    target: 'map',
-    layers: [
-      new ol.layer.Tile({
-        source: new ol.source.OSM()
-      })
-    ],
-    view: new ol.View({
-      center: ol.proj.fromLonLat([currentLocation.lng, currentLocation.lat]),
-      zoom: 16
+    var map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM({
+          }),
+        }),
+        new ol.layer.Vector({
+          source: new ol.source.Vector({
+            features: [new ol.Feature(point)],
+          }),
+          style: new ol.style.Style({
+            image: new ol.style.Circle({
+              radius: 19,
+              fill: new ol.style.Fill({color: 'red'}),
+            }),
+          }),
+        }),
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([currentLocation.lng, currentLocation.lat]),
+      zoom: zoom
     })
   });
   }else{
