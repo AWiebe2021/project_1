@@ -66,7 +66,7 @@ let pixabayApiKey = "22722015-2600ce20055da0a54f573e666";
 let searchPage = 0;
 let searchLimit = 10;
 
-// var ug = import {useGeographic} from 'ol/proj';
+//var ug = import {useGeographic} from 'ol/proj';
 const useGeographic = require("ol/proj").useGeographic;
 useGeographic();
 
