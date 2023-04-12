@@ -41,8 +41,12 @@ footer {
 }
 
 .card-width {
-  display: flex;
+  display: float;
   flex-wrap: wrap;
+}
+
+.col {
+  border: 2px ridge black;
 }
 
 #camp-list {
@@ -73,13 +77,13 @@ footer {
 }
 
 .card {
-  min-height: 550px;
-  min-width: 283px;
+  min-height: 530px;
+  min-width: 253px;
 }
 
 .card-custom {
   width: 100%;
-  height: 550px;
+  height: 530px;
 }
 
 #user-input-container {
