@@ -211,8 +211,8 @@ footer {
     /* display:inline-block; */
     /* align-self: stretch;
     vertical-align: top; */
-    width: 250px;
-    height: 550px;
+    /* width: 250px; */
+    height: 100%;
   }
   .card-custom {
     position:fixed; left:360px; top:120px;
@@ -220,8 +220,8 @@ footer {
     /* display: flex; */
     /* vertical-align: top; */
     /* justify-content: flex-end; */
-    width: 600px;
-    height:550px;
+    /* width: 600px; */
+    height:100%;
   }
   .map {
     width: 100%;
