@@ -205,7 +205,7 @@ function gatherCampsites(){
       let str = centerOfStates[(validStates.indexOf(searchStr))];
       let myArr = str.split(",");
       currentLocation = {lat:myArr[0].trim(),lng:myArr[1].trim()};
-      updateMap(6.5);
+      updateMap(6.5,false);
 
       // const vectorLayer = new VectorLayer({
       //   source: new VectorSource({
@@ -399,7 +399,7 @@ function specCampsites(){
       .then(weatherResponse => {
         // console.log(weatherResponse)
         //setting 5 day forcast
-          updateMap(16); 
+          updateMap(10.5,true); 
           //DOM manipulation    
           for (let i = 1; i < 7; i++) {
             document.querySelector("#Day"+i).textContent = (moment().add(i, 'd')).format("L");
@@ -410,7 +410,7 @@ function specCampsites(){
           };
       });
     }else{
-      updateMap(16); 
+      updateMap(10.5,true); 
       for (let i = 1; i < 7; i++) {
         document.querySelector("#Day"+i).textContent = (moment().add(i, 'd')).format("L");
         document.querySelector("#Day"+i+"-temp").textContent = "Hi Temp: " + "NDA";
@@ -493,7 +493,7 @@ function populateModal(){
   };
 }
 
-function updateMap(zoom){
+function updateMap(zoom, showMarker){
 
   //clear map
   var mapEl = document.getElementById("map");
@@ -528,6 +528,25 @@ function updateMap(zoom){
       zoom: zoom
     })
   });
+  if (showMarker){
+    const layer = new ol.layer.Vector({
+      source: new ol.source.Vector({
+          features: [
+          new ol.Feature({
+              geometry: new ol.geom.Point(ol.proj.fromLonLat([currentLocation.lng, currentLocation.lat])),
+          })
+          ]
+      }),
+      style: new ol.style.Style({
+          image: new ol.style.Icon({
+          anchor: [0.5, 1],
+          crossOrigin: 'anonymous',
+          src: 'https://docs.maptiler.com/openlayers/default-marker/marker-icon.png',
+          })
+      })
+    });
+    map.addLayer(layer);
+    }
   }else{
     mapEl.innerText = "No Data Available"
   };
