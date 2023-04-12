@@ -232,8 +232,8 @@ footer {
 
   footer:before {
     display: block;
-      position:fixed; left:130px; bottom:50px;
-    content: "Thank you for printing our content, Team 3. Aaron Wiebe, David Whipple, Kevin Phan, Lucas Wick, Samantha Ybarra";
+      position:bottom; left:130px; bottom:50px;
+    content: "Thank you for printing my content. Aaron Wiebe";
     border: 1px solid #bbb;
     font-style: italic;
     text-align: center;
