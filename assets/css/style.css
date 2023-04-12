@@ -199,9 +199,10 @@ footer {
 @media print {
   @page {
     size: landscape;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    display: block;
+    width:100%;
+    /* flex-direction: row;
+    align-items: flex-start; */
 
   }
 
@@ -230,12 +231,12 @@ footer {
     display: none !important;
   }
 
-  footer:before {
+/*   footer:before {
     display: block;
       position:bottom; left:130px; bottom:50px;
     content: "Thank you for printing my content. Aaron Wiebe";
     border: 1px solid #bbb;
     font-style: italic;
     text-align: center;
-  }
+  } */
 }
