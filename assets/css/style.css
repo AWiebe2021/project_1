@@ -2,7 +2,8 @@ ul {
   vertical-align: top;
   padding-left: 20px;
   padding-right: 20px;
-  float: left;
+  /* float: left; */
+  margin: auto;
 }
 
 li {
@@ -31,7 +32,9 @@ footer {
   bottom: 0;
   width: 100%;
 }
-
+.s12 {
+  height: 558px;
+}
 /* .container {
   width:100%;
 } */
@@ -82,6 +85,7 @@ footer {
 }
 
 .card-custom {
+  min-width: 530px;
   width: 100%;
   height: 530px;
 }
@@ -203,33 +207,40 @@ footer {
 @media print {
   @page {
     size: landscape;
-    display: block;
-    width:100%;
-    /* flex-direction: row;
-    align-items: flex-start; */
+    /* display: inline-flex;  */
+    /* width:100%; */
+    /* flex-direction: row; */
+    /* align-items: flex-start;  */
 
   }
-
+  .col {
+    border: none;
+  }
   .card {
-    position:fixed; left:60px; top:120px;
-    /* display:inline-block; */
-    /* align-self: stretch;
-    vertical-align: top; */
+    position:fixed; left:60px; top:10px;
+    /* display:inline; */
+    /* align-self: stretch;*/
+    /* vertical-align: top; */
     /* width: 250px; */
-    height: 100%;
+    height:300px;
   }
   .card-custom {
-    position:fixed; left:360px; top:120px;
-    /* display:inline-block; */
+    position:fixed; left:320px; top:10px;
+    /* display:inline; */
     /* display: flex; */
     /* vertical-align: top; */
     /* justify-content: flex-end; */
-    /* width: 600px; */
-    height:100%;
+    width: 200px;
+    height:200px;
   }
   .map {
-    width: 100%;
-    height: 100%;
+    /* display:inline; */
+    height: 100vh;
+ 
+  }
+
+  .s12{
+    height: 200px;
   }
   .noPrint {
     display: none !important;
